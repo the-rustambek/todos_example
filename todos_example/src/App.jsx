@@ -19,6 +19,22 @@ const handleDelete = (evt) =>{
     
 }
 
+const handleComplete = (evt) =>{
+    // console.log(evt.target.dataset.todoId);
+    const todoId  = evt.target.dataset.todoId - 0;
+// console.log(evt.target.dataset);
+
+    const foundTodo = todos.find((row) => row.id === todoId);
+
+    foundTodo.isCompleted = !foundTodo.isCompleted;
+
+    setTodos([...todos]);
+
+    window.localStorage.setItem("todos",JSON.stringify([...todos]));
+ 
+
+}
+
 
 return ( 
       <>
@@ -46,7 +62,7 @@ return (
 
           <ul>
                 {todos.map((row) =>(
-             <Todo handleDelete={handleDelete} key={row.id} id={row.id} >
+             <Todo handleDelete={handleDelete} handleComplete={handleComplete} isCompleted={row.isCompleted} key={row.id} id={row.id} >
                  {row.title}
                   </Todo>
                 ))}
