@@ -32,6 +32,10 @@ return (
                           isCompleted: false
                       };
                       setTodos([...todos,newTodo]);
+
+                      window.localStorage.setItem("todos",JSON.stringify([...todos,newTodo]));
+                      evt.target.value = null;
+
           }
 
           }} 
