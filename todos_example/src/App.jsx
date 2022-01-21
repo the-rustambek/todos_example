@@ -4,10 +4,7 @@ import Todo from './Components/TodoComponents';
 
 function App() {
 
-const [todos,setTodos] = useState([
-{id:1, title: "code yozdim", isCompleted: true},
-{id:2, title: "code yozmadim", isCompleted: true}
-]);
+const [todos,setTodos] = useState(JSON.parse(window.localStorage.getItem("todos")) || [] );
 
 const handleDelete = (evt) =>{
     // console.log(evt.target.dataset.todoId);
@@ -16,6 +13,9 @@ const handleDelete = (evt) =>{
     const filterTodos = todos.filter((row) => row.id !== todoId);
     // console.log(filterTodos, "alo")
     setTodos([...filterTodos]);
+
+    
+    window.localStorage.setItem("todos",JSON.stringify([...filterTodos]));
     
 }
 
