@@ -1,9 +1,16 @@
-function Todo ({children, handleDelete,id,handleComplete,isCompleted}){
-return <li>
-    <span style={{textDecoration: isCompleted && "line-through"}}>{children}</span>
+import { useRef } from "react";
 
-<input checked={isCompleted} type="checkbox" data-todo-id={id} onChange={handleComplete} />
-    <button data-todo-id={id} onClick={handleDelete}>Delete</button>
+function Todo ({children, handleDelete,id,handleComplete,isCompleted}){
+const elHeader =  useRef();
+
+return <li>
+    <span ref={elHeader} style={{textDecoration: isCompleted && "line-through"}}>{children}</span>
+
+    <input  checked={isCompleted} type="checkbox" data-todo-id={id} onChange={handleComplete} />
+    <button  data-todo-id={id} onClick={handleDelete}>Delete</button>
+    <button onDoubleClick={() =>{
+        elHeader.current.style.backgroundColor="red"
+    }}>add</button>
 </li>
 }
 
